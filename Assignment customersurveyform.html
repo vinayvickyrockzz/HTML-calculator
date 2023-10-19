@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Survey Form</title>
+</head>
+<body>
+  <form id="surveyForm" onsubmit="return validateForm()">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" required>
+    
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" required>
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" required>
+    
+    <label for="country">Country:</label>
+    <select id="country" required>
+      <option value="USA">USA</option>
+      <option value="Canada">Canada</option>
+      <option value="UK">UK</option>
+      <!-- Add more countries as needed -->
+    </select>
+    
+    <label>Gender:</label>
+    <input type="checkbox" id="male" name="gender" value="Male">
+    <label for="male">Male</label>
+    <input type="checkbox" id="female" name="gender" value="Female">
+    <label for="female">Female</label>
+    
+    <label for="profession">Profession:</label>
+    <input type="text" id="profession" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" required>
+    
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+  </form>
+  
+  <div id="popup" style="display: none;">
+    <h2>Survey Form Submission</h2>
+    <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+    <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+    <p><strong>Date of Birth:</strong> <span id="popupDob"></span></p>
+    <p><strong>Country:</strong> <span id="popupCountry"></span></p>
+    <p><strong>Gender:</strong> <span id="popupGender"></span></p>
+    <p><strong>Profession:</strong> <span id="popupProfession"></span></p>
+    <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+    <p><strong>Mobile Number:</strong> <span id="popupMobile"></span></p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <script>
+    function validateForm() {
+      // Validation logic can be added here (e.g., email format validation, mobile number format validation).
+      // For simplicity, let's assume all fields are valid.
+      
+      // Display the data in the popup
+      document.getElementById("popupFirstName").innerText = document.getElementById("firstName").value;
+      document.getElementById("popupLastName").innerText = document.getElementById("lastName").value;
+      document.getElementById("popupDob").innerText = document.getElementById("dob").value;
+      document.getElementById("popupCountry").innerText = document.getElementById("country").value;
+      const genderCheckboxes = document.querySelectorAll('input[name="gender"]:checked');
+      const genders = Array.from(genderCheckboxes).map(cb => cb.value);
+      document.getElementById("popupGender").innerText = genders.join(', ');
+      document.getElementById("popupProfession").innerText = document.getElementById("profession").value;
+      document.getElementById("popupEmail").innerText = document.getElementById("email").value;
+      document.getElementById("popupMobile").innerText = document.getElementById("mobile").value;
+      
+      // Display the popup
+      document.getElementById("popup").style.display = "block";
+      
+      // Reset the form
+      document.getElementById("surveyForm").reset();
+      
+      // Prevent the form from submitting
+      return false;
+    }
+    
+    function closePopup() {
+      // Close the popup
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
+</body>
+</html>
